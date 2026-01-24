@@ -20,7 +20,7 @@ function testStructuredError() {
     message: 'Test structured error',
     why: 'This is a demonstration of the EvlogError format',
     fix: 'No fix needed - this is just a demo',
-    link: 'https://github.com/HugoRCD/evlog',
+    link: 'https://github.com/hugorcd/evlog',
   })
   console.error(String(error))
 }

@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/evlog?color=black)](https://npmjs.com/package/evlog)
 [![npm downloads](https://img.shields.io/npm/dm/evlog?color=black)](https://npm.chart.dev/evlog)
-[![license](https://img.shields.io/github/license/HugoRCD/evlog?color=black)](https://github.com/HugoRCD/evlog/blob/main/LICENSE)
+[![license](https://img.shields.io/github/license/hugorcd/evlog?color=black)](https://github.com/hugorcd/evlog/blob/main/LICENSE)
 
 <!-- /automd -->
 

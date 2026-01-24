@@ -164,6 +164,38 @@ cd packages/evlog
 bun run release
 ```
 
+## Agent Skills
+
+This repository includes agent skills for AI-assisted code review and evlog adoption.
+
+### Available Skills
+
+| Skill | Description |
+|-------|-------------|
+| `skills/evlog` | Review code for logging patterns, suggest evlog adoption, guide wide event design |
+
+### Skill Structure
+
+```
+skills/
+└── evlog/
+    ├── SKILL.md              # Main skill instructions
+    └── references/
+        ├── wide-events.md    # Wide events patterns
+        ├── structured-errors.md # Error handling guide
+        └── code-review.md    # Review checklist
+```
+
+### Using Skills
+
+Skills follow the [Agent Skills](https://agentskills.io/) specification. Compatible agents (Cursor, Claude Code, etc.) can discover and use these skills automatically.
+
+To manually install with the skills CLI:
+
+```bash
+npx skills add hugorcd/evlog
+```
+
 ## Credits
 
 This library is inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://github.com/boristane). The wide events philosophy and structured logging approach are adapted from his excellent work on making logging more useful.
