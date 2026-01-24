@@ -1,5 +1,9 @@
 {
   "private": true,
-  "name": "basic",
-  "type": "module"
+  "name": "evlog-test-basic",
+  "type": "module",
+  "devDependencies": {
+    "evlog": "workspace:*",
+    "nuxt": "^4.3.0"
+  }
 }

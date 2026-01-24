@@ -10,29 +10,30 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/types.d.mts",
-      "import": "./dist/module.mjs"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     },
     "./nuxt": {
-      "types": "./dist/nuxt.d.mts",
-      "import": "./dist/nuxt.mjs"
+      "types": "./dist/nuxt/module.d.mts",
+      "import": "./dist/nuxt/module.mjs"
     },
     "./nitro": {
-      "types": "./dist/nitro.d.mts",
-      "import": "./dist/nitro.mjs"
+      "types": "./dist/nitro/plugin.d.mts",
+      "import": "./dist/nitro/plugin.mjs"
     }
   },
-  "main": "./dist/module.mjs",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
       ".": [
-        "./dist/types.d.mts"
+        "./dist/index.d.mts"
       ],
       "nuxt": [
-        "./dist/nuxt.d.mts"
+        "./dist/nuxt/module.d.mts"
       ],
       "nitro": [
-        "./dist/nitro.d.mts"
+        "./dist/nitro/plugin.d.mts"
       ]
     }
   },
@@ -40,8 +41,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "nuxt-module-build build",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare",
+    "build": "unbuild",
+    "dev:prepare": "unbuild --stub",
     "release": "bun run lint && bun run test && bun run build && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -50,15 +51,30 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^4.3.0"
+    "@nuxt/kit": "^4.3.0",
+    "pkg-types": "^2.0.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "^3.1.1",
-    "@nuxt/module-builder": "^1.0.2",
     "@nuxt/schema": "^4.3.0",
     "@nuxt/test-utils": "^3.23.0",
-    "typescript": "^5.9.3",
     "changelogen": "^0.6.2",
-    "nuxt": "^4.3.0"
+    "h3": "^1.15.0",
+    "nitropack": "^2.13.0",
+    "nuxt": "^4.3.0",
+    "typescript": "^5.9.3",
+    "unbuild": "^3.5.0"
+  },
+  "peerDependencies": {
+    "h3": "^1.13.0",
+    "nitropack": "^2.10.0"
+  },
+  "peerDependenciesMeta": {
+    "h3": {
+      "optional": true
+    },
+    "nitropack": {
+      "optional": true
+    }
   }
 }

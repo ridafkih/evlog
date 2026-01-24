@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "evlog": "workspace:*",
-    "nuxt": "^4.3.0"
+    "nuxt": "^4.3.0",
+    "@nuxt/ui": "^4.4.0",
+    "tailwindcss": "^4.1.18"
   }
 }

@@ -42,7 +42,7 @@ bun add evlog
 ## Quick Start
 
 ```typescript
-import { createLogger, getLogger, createError } from 'evlog'
+import { log, defineError } from 'evlog'
 
 // Initialize once at app startup
 createLogger({
@@ -53,19 +53,15 @@ createLogger({
   },
 })
 
-const logger = getLogger()
+// Simple logging - as easy as console.log
+log.info('auth', 'User logged in')
+log.error('payment', 'Payment failed')
 
-// Simple logging
-logger.log('auth', 'User logged in')
-
-// Wide events - accumulate context, emit once
-const log = logger.request({ method: 'POST', path: '/checkout' })
-log.set({ user: { id: '123', plan: 'premium' } })
-log.set({ cart: { items: 3, total: 9999 } })
-log.emit() // Single event with all context + duration
+// Wide events with structured data
+log.info({ action: 'login', userId: '123', method: 'oauth' })
 
 // Structured errors
-throw createError({
+throw defineError({
   message: 'Payment failed',
   why: 'Card declined by issuer',
   fix: 'Try a different payment method',
@@ -127,9 +123,9 @@ Output:
 Errors should explain themselves:
 
 ```typescript
-import { createError } from 'evlog'
+import { defineError } from 'evlog'
 
-throw createError({
+throw defineError({
   message: 'Failed to sync repository',
   why: 'GitHub API rate limit exceeded',
   fix: 'Wait 1 hour or use a different token',
@@ -206,12 +202,12 @@ Returns a `RequestLogger` with:
 - `error(error, context?)`: Log an error
 - `emit(overrides?)`: Emit the final event with duration
 
-### `createError(options)`
+### `defineError(options)`
 
-Create a structured error.
+Create a structured error. Named `defineError` to avoid conflict with Nuxt's built-in `createError`.
 
 ```typescript
-createError({
+defineError({
   message: string   // What happened
   why?: string      // Why it happened
   fix?: string      // How to fix it
