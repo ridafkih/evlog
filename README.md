@@ -470,7 +470,7 @@ Help me set up logging for this service
 
 ## Philosophy
 
-Inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://github.com/boristane).
+Inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://x.com/boristane).
 
 1. **Wide Events**: One log per request with all context
 2. **Structured Errors**: Errors that explain themselves

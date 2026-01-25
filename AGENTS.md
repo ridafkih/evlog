@@ -2,7 +2,7 @@
 
 A TypeScript logging library focused on **wide events** and structured error handling.
 
-Inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://github.com/boristane).
+Inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://x.com/boristane).
 
 ## Philosophy
 
@@ -197,6 +197,7 @@ When creating errors with `createError()`:
 - Follow existing patterns in `packages/evlog/src/`
 - Write tests for new functionality
 - Document public APIs with JSDoc comments
+- **No HTML comments in Vue templates** - Never use `<!-- comment -->` in `<template>` blocks. The code should be self-explanatory.
 
 ## Publishing
 
@@ -239,4 +240,4 @@ npx skills add hugorcd/evlog
 
 ## Credits
 
-This library is inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://github.com/boristane). The wide events philosophy and structured logging approach are adapted from his excellent work on making logging more useful.
+This library is inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://x.com/boristane). The wide events philosophy and structured logging approach are adapted from his excellent work on making logging more useful.

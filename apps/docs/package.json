@@ -12,6 +12,7 @@
   "dependencies": {
     "docus": "latest",
     "better-sqlite3": "^12.2.0",
+    "motion-v": "latest",
     "nuxt": "^4.3.0"
   },
   "devDependencies": {

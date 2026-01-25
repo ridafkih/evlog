@@ -1,0 +1,35 @@
+export default defineNuxtConfig({
+  extends: ['docus'],
+
+  modules: ['motion-v/nuxt'],
+
+  css: ['~/assets/css/main.css'],
+
+  site: {
+    name: 'evlog',
+  },
+
+  mcp: {
+    name: 'evlog MCP',
+  },
+
+  mdc: {
+    highlight: {
+      noApiRoute: false,
+    },
+  },
+
+  icon: {
+    customCollections: [
+      {
+        prefix: 'custom',
+        dir: './app/assets/icons',
+      },
+    ],
+    clientBundle: {
+      scan: true,
+      includeCustomCollections: true,
+    },
+    provider: 'iconify',
+  },
+})

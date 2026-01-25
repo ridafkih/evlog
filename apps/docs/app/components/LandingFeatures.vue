@@ -1,0 +1,91 @@
+<script setup lang="ts">
+import { Motion } from 'motion-v'
+
+const features = [
+  {
+    icon: 'i-lucide-layers',
+    title: 'Wide Events',
+    description: 'One comprehensive log per request containing all context. No more scattered logs—just signal, no noise.',
+  },
+  {
+    icon: 'i-lucide-shield-alert',
+    title: 'Structured Errors',
+    description: 'Errors with why, fix, and link fields. Actionable context for debugging and resolution.',
+  },
+  {
+    icon: 'i-lucide-git-branch',
+    title: 'Request Scoping',
+    description: 'Accumulate context throughout the request lifecycle. Emit once at the end with complete data.',
+  },
+  {
+    icon: 'i-lucide-palette',
+    title: 'Pretty for Dev, JSON for Prod',
+    description: 'Human-readable logs in development, machine-parseable JSON in production.',
+  },
+  {
+    icon: 'i-lucide-zap',
+    title: 'Nuxt & Nitro Ready',
+    description: 'First-class integration with Nuxt and Nitro. Auto-create loggers, auto-emit at request end.',
+  },
+  {
+    icon: 'i-lucide-bot',
+    title: 'Agent-Ready',
+    description: 'Structured output that AI agents can parse. Perfect for automated debugging in the agentic era.',
+  },
+]
+</script>
+
+<template>
+  <section class="relative py-32">
+    <div class="editorial-separator mx-auto mb-24 max-w-md" />
+
+    <div class="mx-auto max-w-5xl px-6">
+      <Motion
+        :initial="{ opacity: 0, y: 20 }"
+        :in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.5 }"
+        :in-view-options="{ once: true }"
+        class="mb-20 text-center"
+      >
+        <h2 class="editorial-title mb-6 text-3xl font-bold text-highlighted md:text-4xl">
+          Why evlog<span class="evlog-dot">.</span>
+        </h2>
+        <p class="mx-auto max-w-xl text-base text-muted">
+          Traditional logging is broken. Your logs are scattered, each request generates 10+ log lines,
+          and when something goes wrong, you're grep-ing through noise hoping to find signal.
+        </p>
+      </Motion>
+
+      <div class="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        <Motion
+          v-for="(feature, index) in features"
+          :key="feature.title"
+          :initial="{ opacity: 0, y: 16 }"
+          :in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.4, delay: index * 0.08 }"
+          :in-view-options="{ once: true }"
+          class="group"
+        >
+          <div class="relative">
+            <div class="mb-6 h-px w-12 bg-zinc-200 transition-all duration-300 group-hover:w-16 group-hover:bg-evlog-blue dark:bg-zinc-800" />
+
+            <div class="mb-4">
+              <UIcon
+                :name="feature.icon"
+                class="size-5 text-zinc-400 transition-colors duration-300 group-hover:text-evlog-blue dark:text-zinc-600"
+              />
+            </div>
+
+            <h3 class="mb-3 font-serif text-lg font-medium tracking-tight text-highlighted">
+              {{ feature.title }}
+            </h3>
+
+            <p class="text-sm leading-relaxed text-muted">
+              {{ feature.description }}
+            </p>
+          </div>
+        </Motion>
+      </div>
+    </div>
+  </section>
+</template>
