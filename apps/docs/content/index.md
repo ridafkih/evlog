@@ -10,6 +10,9 @@ seo:
 ::landing-features
 ::
 
+::landing-comparison
+::
+
 ::landing-code
 ::
 

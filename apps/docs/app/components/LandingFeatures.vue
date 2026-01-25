@@ -36,7 +36,7 @@ const features = [
 </script>
 
 <template>
-  <section class="relative py-32">
+  <section id="features" class="relative py-32">
     <div class="editorial-separator mx-auto mb-24 max-w-md" />
 
     <div class="mx-auto max-w-5xl px-6">
@@ -47,16 +47,16 @@ const features = [
         :in-view-options="{ once: true }"
         class="mb-20 text-center"
       >
-        <h2 class="editorial-title mb-6 text-3xl font-bold text-highlighted md:text-4xl">
+        <h2 class="editorial-title mb-6 text-4xl font-bold text-highlighted md:text-5xl">
           Why evlog<span class="evlog-dot">.</span>
         </h2>
-        <p class="mx-auto max-w-xl text-base text-muted">
+        <p class="mx-auto max-w-xl text-lg text-muted">
           Traditional logging is broken. Your logs are scattered, each request generates 10+ log lines,
           and when something goes wrong, you're grep-ing through noise hoping to find signal.
         </p>
       </Motion>
 
-      <div class="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-x-16 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
         <Motion
           v-for="(feature, index) in features"
           :key="feature.title"
@@ -67,16 +67,17 @@ const features = [
           class="group"
         >
           <div class="relative">
-            <div class="mb-6 h-px w-12 bg-zinc-200 transition-all duration-300 group-hover:w-16 group-hover:bg-evlog-blue dark:bg-zinc-800" />
-
-            <div class="mb-4">
-              <UIcon
-                :name="feature.icon"
-                class="size-5 text-zinc-400 transition-colors duration-300 group-hover:text-evlog-blue dark:text-zinc-600"
-              />
+            <div class="mb-6 flex items-center gap-4">
+              <div class="flex size-11 items-center justify-center rounded-full border border-zinc-200 bg-zinc-50 transition-all duration-300 group-hover:border-evlog-blue/40 group-hover:bg-evlog-blue/5 dark:border-zinc-800 dark:bg-zinc-900">
+                <UIcon
+                  :name="feature.icon"
+                  class="size-5 text-zinc-500 transition-colors duration-300 group-hover:text-evlog-blue dark:text-zinc-500"
+                />
+              </div>
+              <div class="h-px flex-1 bg-zinc-200 transition-colors duration-300 group-hover:bg-evlog-blue/30 dark:bg-zinc-800" />
             </div>
 
-            <h3 class="mb-3 font-serif text-lg font-medium tracking-tight text-highlighted">
+            <h3 class="mb-3 font-serif text-xl font-bold tracking-tight text-highlighted">
               {{ feature.title }}
             </h3>
 
