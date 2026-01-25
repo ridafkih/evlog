@@ -39,14 +39,14 @@ export default defineNuxtModule<ModuleOptions>({
     addServerPlugin(resolver.resolve('../nitro/plugin'))
 
     addPlugin({
-      src: resolver.resolve('../runtime/plugin.client'),
+      src: resolver.resolve('../runtime/client/plugin'),
       mode: 'client',
     })
 
     addImports([
       {
         name: 'log',
-        from: resolver.resolve('../runtime/composables/log'),
+        from: resolver.resolve('../runtime/client/log'),
       },
       {
         name: 'createEvlogError',
@@ -54,18 +54,18 @@ export default defineNuxtModule<ModuleOptions>({
       },
       {
         name: 'parseError',
-        from: resolver.resolve('../runtime/composables/parseError'),
+        from: resolver.resolve('../runtime/utils/parseError'),
       },
     ])
 
     addServerImports([
       {
         name: 'useLogger',
-        from: resolver.resolve('../runtime/composables/useLogger'),
+        from: resolver.resolve('../runtime/server/useLogger'),
       },
       {
         name: 'log',
-        from: resolver.resolve('../runtime/composables/log'),
+        from: resolver.resolve('../runtime/client/log'),
       },
       {
         name: 'createEvlogError',

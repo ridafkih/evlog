@@ -38,67 +38,75 @@ evlog/
 ├── packages/
 │   └── evlog/               # Main package
 │       ├── src/
-│       │   ├── module.ts    # Nuxt module definition
-│       │   └── runtime/     # Runtime code
+│       │   ├── nuxt/        # Nuxt module
+│       │   ├── nitro/       # Nitro plugin
+│       │   └── runtime/     # Runtime code (client/, server/, utils/)
 │       └── test/            # Tests
 └── .github/                  # CI/CD workflows
 ```
 
 ## Core API
 
-### Logger
+### Nuxt/Nitro API Routes
+
+Use `useLogger(event)` in any API route. The logger is auto-created and auto-emitted at request end.
 
 ```typescript
-import { createLogger, getLogger } from 'evlog'
+// server/api/checkout.post.ts
+export default defineEventHandler(async (event) => {
+  const log = useLogger(event)
 
-// Initialize once at app startup
-createLogger({
-  env: {
-    service: 'api',
-    environment: 'production',
-    version: '1.0.0',
-  },
+  log.set({ user: { id: user.id, plan: user.plan } })
+  log.set({ cart: { items: 3, total: 9999 } })
+
+  // On success: emits INFO level wide event automatically
+  return { success: true }
 })
-
-// Get logger anywhere
-const logger = getLogger()
-
-// Simple logging
-logger.log('auth', 'User logged in')
-
-// Wide events
-logger.info({ userId: '123', action: 'checkout', items: 3 })
-logger.error({ userId: '123', error: 'payment_failed', reason: 'card_declined' })
 ```
 
-### Request Logger (Wide Events)
+### Standalone TypeScript (scripts, workers, CLI)
+
+Use `initLogger()` once at startup, then `createRequestLogger()` for each logical operation.
 
 ```typescript
-const log = logger.request({ method: 'POST', path: '/checkout' })
+// scripts/sync-job.ts
+import { initLogger, createRequestLogger } from 'evlog'
 
-// Accumulate context throughout the request
-log.set({ user: { id: '123', plan: 'premium' } })
-log.set({ cart: { items: 3, total: 9999 } })
+initLogger({
+  env: { service: 'sync-worker', environment: 'production' },
+})
 
-// On error
-log.error(error, { step: 'payment' })
+const log = createRequestLogger({ jobId: job.id })
+log.set({ source: job.source, target: job.target })
+log.set({ recordsSynced: 150 })
+log.emit() // Manual emit required
+```
 
-// Emit final event with all context + duration
-log.emit()
+### Simple Logging (anywhere)
+
+Use `log` for quick one-off logs. Auto-imported in Nuxt, manual import elsewhere.
+
+```typescript
+import { log } from 'evlog'
+
+log.info('auth', 'User logged in')
+log.error({ action: 'payment', error: 'card_declined' })
 ```
 
 ### Structured Errors
 
+Use `createError()` to throw errors with context. Works with Nitro's error handling.
+
 ```typescript
+// server/api/checkout.post.ts
 import { createError } from 'evlog'
 
 throw createError({
   message: 'Payment failed',
-  status: 402,  // HTTP status code (default: 500)
+  status: 402,
   why: 'Card declined by issuer',
-  fix: 'Try a different payment method or contact your bank',
+  fix: 'Try a different payment method',
   link: 'https://docs.example.com/payments/declined',
-  cause: originalError,
 })
 ```
 

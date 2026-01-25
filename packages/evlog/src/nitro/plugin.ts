@@ -1,18 +1,6 @@
 import { defineNitroPlugin } from 'nitropack/runtime'
 import { createRequestLogger, initLogger } from '../logger'
-import type { RequestLogger } from '../types'
-
-interface ServerEvent {
-  method: string
-  path: string
-  context: {
-    requestId?: string
-    log?: RequestLogger
-    [key: string]: unknown
-  }
-  node?: { res?: { statusCode?: number } }
-  response?: Response
-}
+import type { RequestLogger, ServerEvent } from '../types'
 
 function getResponseStatus(event: ServerEvent): number {
   // Node.js style

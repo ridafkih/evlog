@@ -142,8 +142,43 @@ export interface ErrorOptions {
 }
 
 /**
- * Server event context with evlog logger attached
+ * Options for creating a request logger
  */
-export interface EvlogEventContext {
+export interface RequestLoggerOptions {
+  method?: string
+  path?: string
+  requestId?: string
+}
+
+/**
+ * H3 event context with evlog logger attached
+ */
+export interface H3EventContext {
   log?: RequestLogger
+  requestId?: string
+  status?: number
+  [key: string]: unknown
+}
+
+/**
+ * Server event type for Nitro/h3 handlers
+ */
+export interface ServerEvent {
+  method: string
+  path: string
+  context: H3EventContext
+  node?: { res?: { statusCode?: number } }
+  response?: Response
+}
+
+/**
+ * Parsed evlog error with all fields at the top level
+ */
+export interface ParsedError {
+  message: string
+  status: number
+  why?: string
+  fix?: string
+  link?: string
+  raw: unknown
 }

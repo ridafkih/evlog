@@ -1,5 +1,5 @@
-import type { EnvironmentContext, Log, LogLevel, LoggerConfig, RequestLogger } from './types'
-import { colors, detectEnvironment, formatDuration, getLevelColor, isDev } from './utils'
+import type { EnvironmentContext, Log, LogLevel, LoggerConfig, RequestLogger, RequestLoggerOptions } from './types'
+import { colors, detectEnvironment, formatDuration, getConsoleMethod, getLevelColor, isDev } from './utils'
 
 let globalEnv: EnvironmentContext = {
   service: 'app',
@@ -24,10 +24,6 @@ export function initLogger(config: LoggerConfig = {}): void {
   }
 
   globalPretty = config.pretty ?? isDev()
-}
-
-function getConsoleMethod(level: LogLevel): 'log' | 'error' | 'warn' {
-  return level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'
 }
 
 function emitWideEvent(level: LogLevel, event: Record<string, unknown>): void {
@@ -118,12 +114,6 @@ export const log: Log = {
   error: createLogMethod('error'),
   warn: createLogMethod('warn'),
   debug: createLogMethod('debug'),
-}
-
-interface RequestLoggerOptions {
-  method?: string
-  path?: string
-  requestId?: string
 }
 
 /**

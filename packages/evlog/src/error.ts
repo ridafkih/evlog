@@ -40,28 +40,16 @@ export class EvlogError extends Error {
     }
   }
 
-  /**
-   * HTTP compatibility: statusCode getter for automatic error handling
-   */
   get statusCode(): number {
     return this.status
   }
 
-  /**
-   * HTTP compatibility: data getter for passing structured error info to frontend
-   */
-  get data(): { why?: string, fix?: string, link?: string } | undefined {
-    if (!this.why && !this.fix && !this.link) return undefined
-    return {
-      why: this.why,
-      fix: this.fix,
-      link: this.link,
-    }
+  get data() {
+    return this.why || this.fix || this.link
+      ? { why: this.why, fix: this.fix, link: this.link }
+      : undefined
   }
 
-  /**
-   * Format error for console output with colors
-   */
   override toString(): string {
     // Use colors only on server (terminal)
     const useColors = isServer()
@@ -96,9 +84,6 @@ export class EvlogError extends Error {
     return lines.join('\n')
   }
 
-  /**
-   * Convert to plain object for JSON serialization
-   */
   toJSON(): Record<string, unknown> {
     return {
       name: this.name,
@@ -117,15 +102,23 @@ export class EvlogError extends Error {
 }
 
 /**
- * Create an EvlogError (functional alternative to `new EvlogError()`)
+ * Create a structured error with context for debugging and user-facing messages.
+ *
+ * @param options - Error message string or full options object
+ * @returns EvlogError instance compatible with Nitro's error handling
  *
  * @example
  * ```ts
+ * // Simple error
+ * throw createError('Something went wrong')
+ *
+ * // Structured error with context
  * throw createError({
  *   message: 'Payment failed',
  *   status: 402,
  *   why: 'Card declined by issuer',
  *   fix: 'Try a different payment method',
+ *   link: 'https://docs.example.com/payments',
  * })
  * ```
  */
@@ -133,7 +126,4 @@ export function createError(options: ErrorOptions | string): EvlogError {
   return new EvlogError(options)
 }
 
-/**
- * Alias for createError - used for auto-imports to avoid conflicts with Nuxt/Nitro's createError
- */
 export const createEvlogError = createError

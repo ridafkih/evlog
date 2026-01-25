@@ -1,3 +1,5 @@
+import { createError } from 'evlog'
+
 export default defineEventHandler(async (event) => {
   const logger = useLogger(event)
 
@@ -14,10 +16,10 @@ export default defineEventHandler(async (event) => {
     reason: 'Card declined by issuer',
   })
 
-  logger.emit()
-
   throw createError({
-    statusCode: 400,
     message: 'Payment processing failed',
+    status: 400,
+    why: 'Card was declined by the issuer',
+    fix: 'Try a different payment method',
   })
 })

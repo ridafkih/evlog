@@ -1,4 +1,5 @@
 import type { Log, LogLevel } from '../../types'
+import { getConsoleMethod } from '../../utils'
 
 const IS_CLIENT = typeof window !== 'undefined'
 
@@ -15,10 +16,6 @@ const LEVEL_COLORS: Record<string, string> = {
 export function initLog(options: { pretty?: boolean, service?: string } = {}): void {
   clientPretty = options.pretty ?? true
   clientService = options.service ?? 'client'
-}
-
-function getConsoleMethod(level: LogLevel): 'log' | 'error' | 'warn' {
-  return level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'
 }
 
 function emitClientWideEvent(level: LogLevel, event: Record<string, unknown>): void {
@@ -71,15 +68,6 @@ function createLogMethod(level: LogLevel) {
   }
 }
 
-/**
- * Universal logging API - works on both client and server.
- *
- * @example
- * ```ts
- * log.info('auth', 'User logged in')
- * log.info({ action: 'checkout', items: 3 })
- * ```
- */
 export const log: Log = {
   info: createLogMethod('info'),
   error: createLogMethod('error'),

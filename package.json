@@ -16,7 +16,7 @@
     "dev:docs": "turbo run dev --filter=evlog-docs",
     "docs": "turbo run dev --filter=evlog-docs",
     "build": "turbo run build",
-    "build:module": "turbo run build --filter=evlog",
+    "build:package": "turbo run build --filter=evlog",
     "build:docs": "turbo run build --filter=evlog-docs",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
@@ -27,12 +27,12 @@
   "devDependencies": {
     "@hrcd/eslint-config": "^3.0.3",
     "@types/node": "latest",
-    "automd": "^0.4.0",
-    "eslint": "^9.39.1",
-    "turbo": "^2.6.1",
+    "automd": "^0.4.2",
+    "eslint": "^9.39.2",
+    "turbo": "^2.7.6",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.14",
-    "vue-tsc": "^3.1.5"
+    "vitest": "^4.0.18",
+    "vue-tsc": "^3.2.3"
   },
   "workspaces": [
     "apps/*",

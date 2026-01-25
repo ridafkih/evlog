@@ -1,10 +1,5 @@
-import type { EnvironmentContext } from './types'
+import type { EnvironmentContext, LogLevel } from './types'
 
-/**
- * Format duration for display
- * < 1s: shows milliseconds (e.g., "42ms")
- * >= 1s: shows seconds (e.g., "1.5s")
- */
 export function formatDuration(ms: number): string {
   if (ms < 1000) {
     return `${Math.round(ms)}ms`
@@ -12,23 +7,14 @@ export function formatDuration(ms: number): string {
   return `${(ms / 1000).toFixed(2)}s`
 }
 
-/**
- * Check if running on server
- */
 export function isServer(): boolean {
   return typeof window === 'undefined'
 }
 
-/**
- * Check if running on client
- */
 export function isClient(): boolean {
   return typeof window !== 'undefined'
 }
 
-/**
- * Check if in development mode
- */
 export function isDev(): boolean {
   if (typeof process !== 'undefined' && process.env.NODE_ENV) {
     return process.env.NODE_ENV !== 'production'
@@ -36,9 +22,6 @@ export function isDev(): boolean {
   return true
 }
 
-/**
- * Auto-detect environment context from env variables
- */
 export function detectEnvironment(): Partial<EnvironmentContext> {
   const env = typeof process !== 'undefined' ? process.env : {}
 
@@ -57,7 +40,10 @@ export function detectEnvironment(): Partial<EnvironmentContext> {
   }
 }
 
-// ANSI color codes for terminal output
+export function getConsoleMethod(level: LogLevel): 'log' | 'error' | 'warn' {
+  return level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'
+}
+
 export const colors = {
   reset: '\x1B[0m',
   bold: '\x1B[1m',
@@ -72,9 +58,6 @@ export const colors = {
   gray: '\x1B[90m',
 } as const
 
-/**
- * Get color for log level
- */
 export function getLevelColor(level: string): string {
   switch (level) {
     case 'error':
