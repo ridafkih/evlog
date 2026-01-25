@@ -34,8 +34,8 @@ jobs:
       - name: Build (stub)
         run: bun run dev:prepare
 
-      - name: Build project
-        run: bun run build:module
+      - name: Build package
+        run: bun run build:package
 
       - name: Publish to npm
         working-directory: packages/evlog

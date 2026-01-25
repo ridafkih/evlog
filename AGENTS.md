@@ -23,7 +23,7 @@ Traditional logging is broken. Your logs are scattered across dozens of files, e
 | `bun run dev` | Start playground |
 | `bun run dev:prepare` | Prepare module (generate types) |
 | `bun run docs` | Start documentation site |
-| `bun run build:module` | Build the module |
+| `bun run build:package` | Build the package |
 | `bun run test` | Run tests |
 | `bun run lint` | Lint all packages |
 | `bun run typecheck` | Type check all packages |
