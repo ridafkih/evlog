@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Wide event logging library with structured error handling. Inspired by LoggingSucks.",
   "author": "HugoRCD <contact@hrcd.fr>",
-  "homepage": "https://github.com/HugoRCD/evlog",
+  "homepage": "https://evlog.dev",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HugoRCD/evlog.git"

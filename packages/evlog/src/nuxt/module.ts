@@ -25,7 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'evlog',
     configKey: 'evlog',
-    docs: 'https://github.com/hugorcd/evlog',
+    docs: 'https://evlog.dev',
   },
   defaults: {},
   setup(options, nuxt) {
