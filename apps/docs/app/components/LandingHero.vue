@@ -31,7 +31,7 @@ import { Motion } from 'motion-v'
         :animate="{ opacity: 1, scale: 1 }"
         :transition="{ duration: 0.8, delay: 0.1 }"
       >
-        <h1 class="editorial-title mb-10 text-6xl font-bold text-zinc-900 dark:text-white md:text-8xl">
+        <h1 class="editorial-title mb-10 text-5xl font-bold text-zinc-900 dark:text-white sm:text-6xl md:text-8xl">
           Logging that<br>
           makes sense<span class="text-evlog-blue">.</span>
         </h1>

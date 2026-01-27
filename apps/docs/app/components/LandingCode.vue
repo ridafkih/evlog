@@ -29,6 +29,7 @@ const activeErrorTab = ref<'code' | 'output'>('code')
           :in-view="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
+          class="min-w-0"
         >
           <div class="overflow-hidden border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
             <div class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800">
@@ -51,9 +52,9 @@ const activeErrorTab = ref<'code' | 'output'>('code')
               <span class="px-4 text-xs text-muted">Wide Events</span>
             </div>
 
-            <div class="p-4">
-              <div v-show="activeTab === 'code'">
-                <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-highlighted"><span class="text-zinc-500">// server/api/checkout.post.ts</span>
+            <div class="overflow-hidden p-4">
+              <div v-show="activeTab === 'code'" class="overflow-x-auto">
+                <pre class="text-[13px] leading-relaxed"><code class="text-highlighted"><span class="text-zinc-500">// server/api/checkout.post.ts</span>
 <span class="text-violet-500">export default</span> <span class="text-amber-500">defineEventHandler</span>(<span class="text-violet-500">async</span> (event) => {
   <span class="text-violet-500">const</span> log = <span class="text-amber-500">useLogger</span>(event)
 
@@ -91,6 +92,7 @@ const activeErrorTab = ref<'code' | 'output'>('code')
           :in-view="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.5, delay: 0.1 }"
           :in-view-options="{ once: true }"
+          class="min-w-0"
         >
           <div class="overflow-hidden border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
             <div class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800">
@@ -113,9 +115,9 @@ const activeErrorTab = ref<'code' | 'output'>('code')
               <span class="px-4 text-xs text-muted">Structured Errors</span>
             </div>
 
-            <div class="p-4">
-              <div v-show="activeErrorTab === 'code'">
-                <pre class="overflow-x-auto text-[13px] leading-relaxed"><code class="text-highlighted"><span class="text-violet-500">throw</span> <span class="text-amber-500">createError</span>({
+            <div class="overflow-hidden p-4">
+              <div v-show="activeErrorTab === 'code'" class="overflow-x-auto">
+                <pre class="text-[13px] leading-relaxed"><code class="text-highlighted"><span class="text-violet-500">throw</span> <span class="text-amber-500">createError</span>({
   <span class="text-sky-400">message</span>: <span class="text-emerald-400">'Payment failed'</span>,
   <span class="text-sky-400">status</span>: <span class="text-pink-400">402</span>,
   <span class="text-sky-400">why</span>: <span class="text-emerald-400">'Card declined by issuer'</span>,
@@ -123,8 +125,8 @@ const activeErrorTab = ref<'code' | 'output'>('code')
   <span class="text-sky-400">link</span>: <span class="text-emerald-400">'https://docs.example.com/payments'</span>
 })</code></pre>
               </div>
-              <div v-show="activeErrorTab === 'output'" class="log-output">
-                <pre class="overflow-x-auto text-[13px] leading-relaxed"><code>{
+              <div v-show="activeErrorTab === 'output'" class="log-output overflow-x-auto">
+                <pre class="text-[13px] leading-relaxed"><code>{
   <span class="log-key">"statusCode"</span>: <span class="log-number">402</span>,
   <span class="log-key">"message"</span>: <span class="log-string">"Payment failed"</span>,
   <span class="log-key">"data"</span>: {

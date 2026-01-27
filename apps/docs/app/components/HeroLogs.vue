@@ -115,7 +115,7 @@ function getTypeColor(type: LogItem['type']) {
 </script>
 
 <template>
-  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+  <div class="pointer-events-none absolute inset-0 max-sm:opacity-25 overflow-hidden">
     <TransitionGroup name="log">
       <div
         v-for="log in logs"
