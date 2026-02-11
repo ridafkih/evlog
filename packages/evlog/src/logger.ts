@@ -251,8 +251,12 @@ export const log: Log = {
 const noopLogger: RequestLogger = {
   set() {},
   error() {},
-  emit() { return null },
-  getContext() { return {} },
+  emit() {
+    return null 
+  },
+  getContext() {
+    return {} 
+  },
 }
 
 export function createRequestLogger<T extends object = Record<string, unknown>>(options: RequestLoggerOptions = {}): RequestLogger<T> {
