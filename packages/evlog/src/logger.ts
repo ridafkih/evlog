@@ -237,17 +237,6 @@ export const log: Log = {
   debug: createLogMethod('debug'),
 }
 
-/**
- * Create a request-scoped logger for building wide events.
- *
- * @example
- * ```ts
- * const log = createRequestLogger({ method: 'POST', path: '/checkout' })
- * log.set({ user: { id: '123' } })
- * log.set({ cart: { items: 3 } })
- * log.emit()
- * ```
- */
 const noopLogger: RequestLogger = {
   set() {},
   error() {},
@@ -259,6 +248,17 @@ const noopLogger: RequestLogger = {
   },
 }
 
+/**
+ * Create a request-scoped logger for building wide events.
+ *
+ * @example
+ * ```ts
+ * const log = createRequestLogger({ method: 'POST', path: '/checkout' })
+ * log.set({ user: { id: '123' } })
+ * log.set({ cart: { items: 3 } })
+ * log.emit()
+ * ```
+ */
 export function createRequestLogger<T extends object = Record<string, unknown>>(options: RequestLoggerOptions = {}): RequestLogger<T> {
   if (!globalEnabled) return noopLogger as RequestLogger<T>
 
